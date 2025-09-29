@@ -5,6 +5,8 @@ import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Rotation;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +14,38 @@ import java.util.List;
 
 public class TransmissionChainHelpers
 {
+	public static Quaternionf getRotation(TransmissionChainBlockEntity be)
+	{
+		Direction facing = be.getBlockState().getValue(TransmissionChainBlock.FACING);
+		ChainConnection connection = AbstractTransmissionChainBlock.getConnection(be.getBlockState());
+
+		Quaternionf rotation = new Quaternionf();
+		Direction up = Direction.UP;
+
+		Vector3f vecFacing = facing.step().normalize();
+		Vector3f vecUp = up.step().normalize();
+
+		if (facing == Direction.UP)
+			rotation = new Quaternionf().fromAxisAngleDeg(1, 0, 0, 90);
+		else if (facing == Direction.DOWN)
+			rotation = new Quaternionf().fromAxisAngleDeg(1, 0, 0, -90);
+		else
+			rotation = rotation.lookAlong(vecFacing, vecUp);
+
+		//Fix for wrong axis alignment (maybe check why).
+		if (facing == Direction.WEST || facing == Direction.EAST)
+			rotation = rotation.invert();
+
+		if (be.isConnected())
+		{
+			ChainSide side = AbstractTransmissionChainBlock.getConnection(be.getBlockState()).side();
+			Quaternionf connectionRotation = new Quaternionf().fromAxisAngleRad(facing.getOpposite().step(), (float) side.rotationAngle);
+			rotation = connectionRotation.mul(rotation);
+		}
+
+		return rotation;
+	}
+
 	/**
 	 * Enum representing the connection types of a transmission chain.
 	 */

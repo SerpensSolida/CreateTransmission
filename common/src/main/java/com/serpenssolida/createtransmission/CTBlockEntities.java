@@ -1,6 +1,7 @@
 package com.serpenssolida.createtransmission;
 
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainBlockEntity;
+import com.serpenssolida.createtransmission.content.chain.TransmissionChainRenderer;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainVisual;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -10,6 +11,7 @@ public class CTBlockEntities
 			.blockEntity("transmission_chain", TransmissionChainBlockEntity::new)
 			.visual(() -> TransmissionChainVisual::new)
 			.validBlocks(CTBlocks.TRANSMISSION_CHAIN, CTBlocks.ANDESITE_ENCASED_TRANSMISSION_CHAIN, CTBlocks.BRASS_ENCASED_TRANSMISSION_CHAIN)
+			.renderer(() -> TransmissionChainRenderer::new)
 			.register();
 
 	private CTBlockEntities() {}
