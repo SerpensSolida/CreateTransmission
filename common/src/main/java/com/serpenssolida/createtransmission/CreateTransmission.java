@@ -25,7 +25,6 @@ public class CreateTransmission
         CTCreativeTabs.init();
 
         CTSpriteShifts.init();
-        CTModels.init();
 
         CTBlocks.init();
         CTBlockEntities.init();

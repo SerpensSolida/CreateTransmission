@@ -22,6 +22,7 @@ public class CTModels
 	/**
 	 * Creates a {@link PartialModel} with the given path.
 	 */
+
 	protected static PartialModel block(String path)
 	{
 		return new PartialModel(CreateTransmission.asResource("block/" + path));

@@ -55,7 +55,7 @@ public class CTBuilderTransformersImpl
 	public static <T extends Block> void noModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov)
 	{
 		VariantBlockStateBuilder variantBuilder = prov.getVariantBuilder(ctx.getEntry());
-		ModelFile.ExistingModelFile modelFile = prov.models().getExistingFile(new ResourceLocation(Create.ID, "block/belt/particle"));
+		ModelFile.ExistingModelFile modelFile = prov.models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Create.ID, "block/belt/particle"));
 
 		variantBuilder.forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(modelFile).build(), AbstractTransmissionChainBlock.WATERLOGGED);
 	}
