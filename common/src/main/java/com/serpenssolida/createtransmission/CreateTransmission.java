@@ -25,7 +25,6 @@ public class CreateTransmission
         CTCreativeTabs.init();
 
         CTSpriteShifts.init();
-        CTModels.init();
 
         CTBlocks.init();
         CTBlockEntities.init();
@@ -43,6 +42,6 @@ public class CreateTransmission
      */
 	public static ResourceLocation asResource(String path)
     {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }
