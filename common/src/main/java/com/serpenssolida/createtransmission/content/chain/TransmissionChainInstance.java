@@ -143,29 +143,7 @@ public class TransmissionChainInstance extends KineticBlockEntityInstance<Transm
 	private BeltData setupChainData(BeltData key, SpriteShiftEntry spriteShift)
 	{
 		Direction facing = blockState.getValue(TransmissionChainBlock.FACING);
-		Quaternionf rotation = new Quaternionf();
-		Direction up = Direction.UP;
-
-		Vector3f vecFacing = facing.step().normalize();
-		Vector3f vecUp = up.step().normalize();
-
-		if (facing == Direction.UP)
-			rotation = new Quaternionf().fromAxisAngleDeg(1, 0, 0, 90);
-		else if (facing == Direction.DOWN)
-			rotation = new Quaternionf().fromAxisAngleDeg(1, 0, 0, -90);
-		else
-			rotation = rotation.lookAlong(vecFacing, vecUp);
-
-		//Fix for wrong axis alignment (maybe check why).
-		if (facing == Direction.WEST || facing == Direction.EAST)
-			rotation = rotation.invert();
-
-		if (blockEntity.isConnected())
-		{
-			ChainSide side = AbstractTransmissionChainBlock.getConnection(blockState).side();
-			Quaternionf connectionRotation = new Quaternionf().fromAxisAngleRad(facing.getOpposite().step(), (float) side.rotationAngle);
-			rotation = connectionRotation.mul(rotation);
-		}
+		Quaternionf rotation = TransmissionChainHelpers.getRotation(blockEntity);
 
 		key.setScrollTexture(spriteShift)
 		   .setScrollMult(0.5f)
@@ -181,7 +159,7 @@ public class TransmissionChainInstance extends KineticBlockEntityInstance<Transm
 	}
 
 	/**
-	 * Retrieves the correct roation speed of the chain for a given direction.
+	 * Retrieves the correct rotation speed of the chain for a given direction.
 	 * @param direction the direction.
 	 *
 	 * @return the speed of the shaft facing the direction.

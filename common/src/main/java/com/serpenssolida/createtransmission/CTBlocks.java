@@ -6,6 +6,7 @@ import com.simibubi.create.AllTags.AllBlockTags;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -24,6 +25,7 @@ public class CTBlocks
 			.lang("Transmission Chain")
 			.properties(properties -> properties.pushReaction(PushReaction.DESTROY).noCollission().strength(0.8f).sound(SoundType.WOOL))
 			.tag(AllBlockTags.BRITTLE.tag, AllBlockTags.FAN_TRANSPARENT.tag, AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag, AllBlockTags.WRENCH_PICKUP.tag)
+			.addLayer(() -> RenderType::cutoutMipped)
 			.transform(BlockStressDefaults.setNoImpact())
 			.transform(axeOrPickaxe())
 			.blockstate(CTBuilderTransformers::noModel)
@@ -37,6 +39,7 @@ public class CTBlocks
 			.lang("Andesite Encased Transmission Chain")
 			.initialProperties(TRANSMISSION_CHAIN)
 			.tag(AllBlockTags.BRITTLE.tag, AllBlockTags.FAN_TRANSPARENT.tag, AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag, AllBlockTags.WRENCH_PICKUP.tag)
+			.addLayer(() -> RenderType::cutoutMipped)
 			.loot((p, b) -> p.dropOther(b, TRANSMISSION_CHAIN.get()))
 			.transform(BlockStressDefaults.setNoImpact())
 			.transform(axeOrPickaxe())
@@ -49,6 +52,7 @@ public class CTBlocks
 			.lang("Brass Encased Transmission Chain")
 			.initialProperties(TRANSMISSION_CHAIN)
 			.tag(AllBlockTags.BRITTLE.tag, AllBlockTags.FAN_TRANSPARENT.tag, AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag, AllBlockTags.WRENCH_PICKUP.tag)
+			.addLayer(() -> RenderType::cutoutMipped)
 			.loot((p, b) -> p.dropOther(b, TRANSMISSION_CHAIN.get()))
 			.transform(BlockStressDefaults.setNoImpact())
 			.transform(axeOrPickaxe())
