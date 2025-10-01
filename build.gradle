@@ -42,7 +42,7 @@ allprojects {
     // Formats the mod version to include the loader, Minecraft version, and build number (if present)
     // example: 1.0.0+fabric-1.18.2-build.100
     String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-    version = "$mod_version+-$project.name-create$create_major-$minecraft_version" + (buildNumber != null ? "-build.$buildNumber" : "")
+    version = "$mod_version+$project.name-create$create_major-$minecraft_version" + (buildNumber != null ? "-build.$buildNumber" : "")
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = "UTF-8"
