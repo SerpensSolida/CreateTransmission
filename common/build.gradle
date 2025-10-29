@@ -30,21 +30,10 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation("net.fabricmc:fabric-loader:$fabric_loader_version")
 
-    forge("net.minecraftforge:forge:$minecraft_version-$forge_version")
-    modApi("dev.architectury:architectury-forge:$architectury_version")
-    modApi("dev.architectury:architectury-forge:$architectury_version")
-    modImplementation("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim"){transitive = false}
-    modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-$flywheel_forge_minecraft_version:$flywheel_forge_version")
-    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-$flywheel_forge_minecraft_version:$flywheel_forge_version")
-    //modRuntimeOnly("dev.engine-room.vanillin:vanillin-forge-$flywheel_forge_minecraft_version:${vanillin_version}")
-    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_forge_version}")
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
-
     // Compile against Create Fabric in common
     // beware of differences across platforms!
     // dependencies must also be pulled in (transitively) for all classes to be remapped properly.
     // All dependencies except Flywheel and Registrate are NOT safe to use!
     // Flywheel and Registrate must also be used carefully due to differences across loaders.
-    //modCompileOnly("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
-    modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim")
+    modCompileOnly("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 }

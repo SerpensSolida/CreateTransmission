@@ -62,8 +62,6 @@ dependencies {
     modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-$minecraft_version:$flywheel_forge_version")
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-$minecraft_version:$flywheel_forge_version")
 
-
-
     // Development QOL
     modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
 

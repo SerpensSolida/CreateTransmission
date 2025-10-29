@@ -87,10 +87,10 @@ public abstract class AbstractTransmissionChainBlock extends KineticBlock implem
 		BlockPos otherPos = pos.offset(facing.getNormal());
 		BlockEntity otherEntity = world.getBlockEntity(otherPos);
 
-		if (otherEntity instanceof BeltBlockEntity beltEntity)
+		if (otherEntity instanceof BeltBlockEntity)
 		{
-			BeltBlock beltBlock = (BeltBlock) beltEntity.getBlockState().getBlock();
-			return beltBlock.hasShaftTowards(world, otherPos, beltEntity.getBlockState(), facing.getOpposite());
+			BeltBlock beltBlock = (BeltBlock) otherEntity.getBlockState().getBlock();
+			return beltBlock.hasShaftTowards(world, otherPos, otherEntity.getBlockState(), facing.getOpposite());
 		}
 
 		return false;
