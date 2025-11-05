@@ -52,7 +52,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
 
     // Create - dependencies are added transitively
-    modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
+    modImplementation("com.simibubi.create:create-fabric:$create_fabric_version")
 
     // Development QOL
     modLocalRuntime("com.terraformersmc:modmenu:$modmenu_version")
@@ -81,7 +81,7 @@ processResources {
             "fabric_loader_version": fabric_loader_version,
             "fabric_api_version": fabric_api_version,
             "minecraft_version": minecraft_version,
-            "create_version": create_fabric_version,
+            "create_version": create_version,
             "github_repo": github_repo// on fabric, use the entire version, unlike forge
     ]
     inputs.properties(properties)
