@@ -2,8 +2,10 @@ package com.serpenssolida.createtransmission.content.chain;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.serpenssolida.createtransmission.CTBlocks;
 import com.serpenssolida.createtransmission.CTModels;
 import com.serpenssolida.createtransmission.CTSpriteShifts;
+import com.serpenssolida.createtransmission.CreateTransmission;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainConnection;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ConnectionType;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
@@ -19,6 +21,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Quaternionf;
 
 public class TransmissionChainRenderer extends SafeBlockEntityRenderer<TransmissionChainBlockEntity>
@@ -29,15 +32,16 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 	@Override
 	protected void renderSafe(TransmissionChainBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay)
 	{
-		if (VisualizationManager.supportsVisualization(be.getLevel()))
+		BlockState blockState = be.getBlockState();
+		if (VisualizationManager.supportsVisualization(be.getLevel()) && !checkBlockState(be))
 			return;
 
 		float renderTick = AnimationTickHolder.getRenderTime(be.getLevel());
 		PoseStack localTransforms = new PoseStack();
 		PoseTransformStack msr = TransformStack.of(localTransforms);
 		VertexConsumer vb = buffer.getBuffer(RenderType.solid());
-		ChainConnection connection = AbstractTransmissionChainBlock.getConnection(be.getBlockState());
-		Direction facing = be.getBlockState().getValue(TransmissionChainBlock.FACING);
+		ChainConnection connection = AbstractTransmissionChainBlock.getConnection(blockState);
+		Direction facing = blockState.getValue(AbstractTransmissionChainBlock.FACING);
 
 		//Rotate the model.
 		Quaternionf rotation = TransmissionChainHelpers.getRotation(be);
@@ -45,8 +49,8 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 
 		//Prepare model.
 		PartialModel beltPartial = getChainModel(connection.type());
-		SuperByteBuffer chainBuffer = CachedBuffers.partial(beltPartial, be.getBlockState())
-													.light(light);
+		SuperByteBuffer chainBuffer = CachedBuffers.partial(beltPartial, blockState);
+		chainBuffer.light(light);
 		SpriteShiftEntry spriteShift = CTSpriteShifts.CHAIN;
 
 		//Texture scroll.
@@ -64,6 +68,12 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 
 		chainBuffer.transform(localTransforms)
 				   .renderInto(ms, vb);
+	}
+
+	private static boolean checkBlockState(TransmissionChainBlockEntity be)
+	{
+		BlockState blockState = be.getBlockState();
+		return CTBlocks.TRANSMISSION_CHAIN.has(blockState) || CTBlocks.ANDESITE_ENCASED_TRANSMISSION_CHAIN.has(blockState) || CTBlocks.BRASS_ENCASED_TRANSMISSION_CHAIN.has(blockState);
 	}
 
 	/**
