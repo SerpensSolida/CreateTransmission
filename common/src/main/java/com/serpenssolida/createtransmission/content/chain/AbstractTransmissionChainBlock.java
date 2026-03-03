@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -47,7 +48,7 @@ import static com.serpenssolida.createtransmission.CTShapes.*;
 
 public abstract class AbstractTransmissionChainBlock extends KineticBlock implements IBE<TransmissionChainBlockEntity>, ProperWaterloggedBlock
 {
-	public static final EnumProperty<Direction> FACING = EnumProperty.create("facing", Direction.class);
+	public static final DirectionProperty FACING = DirectionProperty.create("facing");
 	public static final EnumProperty<ConnectionType> CONNECTION_TYPE = EnumProperty.create("connection_type", ConnectionType.class);
 	public static final EnumProperty<ChainSide> CONNECTION_SIDE = EnumProperty.create("connection_side", ChainSide.class);
 
@@ -148,6 +149,9 @@ public abstract class AbstractTransmissionChainBlock extends KineticBlock implem
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context)
 	{
+		if (context.getPlayer() == null)
+			return defaultBlockState();
+
 		//Face the clicked block.
 		BlockPos clickedPos = context.getClickedPos();
 		Direction facing = context.getClickedFace().getOpposite();
