@@ -10,9 +10,9 @@ import java.util.function.Supplier;
 
 public class CTCreativeTabs
 {
-	public static final ResourceKey<CreativeModeTab> CREATETRANSFER_TAB_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, CreateTransmission.asResource("main"));
+	public static final ResourceKey<CreativeModeTab> CREATETRANSMISSION_TAB_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, CreateTransmission.asResource("main"));
 
-	public static final Supplier<CreativeModeTab> CREATETRANSFER_TAB = registerTab("main", () -> createBuilder()
+	public static final Supplier<CreativeModeTab> CREATETRANSMISSION_TAB = registerTab("main", () -> createBuilder()
 			.icon(CTBlocks.TRANSMISSION_CHAIN::asStack)
 			.title(Component.translatable("creativeTab." + CreateTransmission.MOD_ID + ".main"))
 			.displayItems((param, output) -> output.accept(CTBlocks.TRANSMISSION_CHAIN.get()))
@@ -25,7 +25,7 @@ public class CTCreativeTabs
 	 */
 	public static void init()
 	{
-		CreateTransmission.REGISTRATE.addRawLang("creativeTab." + CreateTransmission.MOD_ID + ".main", "Create: Transfer");
+		CreateTransmission.REGISTRATE.addRawLang("creativeTab." + CreateTransmission.MOD_ID + ".main", "Create: Transmission");
 		CreateTransmission.LOGGER.info("Loading creative tabs for " + CreateTransmission.NAME);
 	}
 

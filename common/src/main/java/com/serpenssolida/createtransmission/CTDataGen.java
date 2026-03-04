@@ -8,9 +8,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-public class CTBuilderTransformers
+public class CTDataGen
 {
-	private CTBuilderTransformers(){}
+	private CTDataGen(){}
 
 	/**
 	 * Generates a blockstate that has no model.

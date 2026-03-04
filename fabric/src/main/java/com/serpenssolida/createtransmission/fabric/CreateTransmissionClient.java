@@ -9,7 +9,7 @@ public class CreateTransmissionClient implements ClientModInitializer
 	@Override
 	public void onInitializeClient()
 	{
-		CreateTransmission.LOGGER.info("Create Transmission Client------------------------------------");
+		CreateTransmission.LOGGER.info("Create Transmission Client");
 		CTModels.init();
 	}
 }

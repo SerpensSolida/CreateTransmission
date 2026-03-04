@@ -16,9 +16,21 @@ public class TransmissionChainHelpers
 {
 	public static Quaternionf getRotation(TransmissionChainBlockEntity be)
 	{
-		Direction facing = be.getBlockState().getValue(TransmissionChainBlock.FACING);
-		ChainConnection connection = AbstractTransmissionChainBlock.getConnection(be.getBlockState());
+		Direction facing = be.getBlockState().getValue(AbstractTransmissionChainBlock.FACING);
+		Quaternionf rotation = getBlockRotation(facing);
 
+		if (be.isConnected())
+		{
+			ChainSide side = AbstractTransmissionChainBlock.getConnection(be.getBlockState()).side();
+			Quaternionf connectionRotation = new Quaternionf().fromAxisAngleRad(facing.getOpposite().step(), (float) side.rotationAngle);
+			rotation = connectionRotation.mul(rotation);
+		}
+
+		return rotation;
+	}
+
+	public static Quaternionf getBlockRotation(Direction facing)
+	{
 		Quaternionf rotation = new Quaternionf();
 		Direction up = Direction.UP;
 
@@ -35,13 +47,6 @@ public class TransmissionChainHelpers
 		//Fix for wrong axis alignment (maybe check why).
 		if (facing == Direction.WEST || facing == Direction.EAST)
 			rotation = rotation.invert();
-
-		if (be.isConnected())
-		{
-			ChainSide side = AbstractTransmissionChainBlock.getConnection(be.getBlockState()).side();
-			Quaternionf connectionRotation = new Quaternionf().fromAxisAngleRad(facing.getOpposite().step(), (float) side.rotationAngle);
-			rotation = connectionRotation.mul(rotation);
-		}
 
 		return rotation;
 	}

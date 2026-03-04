@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 
 import static com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.*;
 
-public class CTBuilderTransformersImpl
+public class CTDataGenImpl
 {
 	public static <T extends Block> void encasedTransmissionChain(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, String casing)
 	{

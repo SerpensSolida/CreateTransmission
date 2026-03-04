@@ -8,14 +8,14 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.PushReaction;
 
-import static com.serpenssolida.createtransmission.CTBuilderTransformers.encasedTransmissionChain;
+import static com.serpenssolida.createtransmission.CTDataGen.encasedTransmissionChain;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class CTBlocks
 {
 	static
 	{
-		CTCreativeTabs.setTab(CTCreativeTabs.CREATETRANSFER_TAB_KEY);
+		CTCreativeTabs.setTab(CTCreativeTabs.CREATETRANSMISSION_TAB_KEY);
 	}
 
 	public static final BlockEntry<TransmissionChainBlock> TRANSMISSION_CHAIN = CreateTransmission.REGISTRATE
@@ -24,9 +24,9 @@ public class CTBlocks
 			.properties(properties -> properties.pushReaction(PushReaction.DESTROY).noCollission().strength(0.8f).sound(SoundType.WOOL))
 			.tag(AllBlockTags.BRITTLE.tag, AllBlockTags.FAN_TRANSPARENT.tag, AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag, AllBlockTags.WRENCH_PICKUP.tag)
 			.transform(axeOrPickaxe())
-			.blockstate(CTBuilderTransformers::noModel)
+			.blockstate(CTDataGen::noModel)
 			.item()
-			.model(CTBuilderTransformers::handheldItem)
+			.model(CTDataGen::handheldItem)
 			.build()
 			.register();
 

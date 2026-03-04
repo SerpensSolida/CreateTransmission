@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.serpenssolida.createtransmission.CTBlocks;
 import com.serpenssolida.createtransmission.CTModels;
 import com.serpenssolida.createtransmission.CTSpriteShifts;
-import com.serpenssolida.createtransmission.CreateTransmission;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainConnection;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ConnectionType;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
@@ -94,7 +93,7 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 	 * Retrieves the correct rotation speed of the chain for a given direction.
 	 *
 	 * @param direction the direction.
-	 * @param blockEntity
+	 * @param blockEntity chain block entity
 	 *
 	 * @return the speed of the shaft facing the direction.
 	 */
