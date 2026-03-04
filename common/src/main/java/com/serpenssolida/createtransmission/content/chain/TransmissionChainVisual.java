@@ -47,10 +47,6 @@ public class TransmissionChainVisual extends KineticBlockEntityVisual<Transmissi
 
 		//Chain instance.
 		Instancer<ScrollInstance> chainKey = instancerProvider().instancer(AllInstanceTypes.SCROLLING, Models.partial(getChainModel(connection.type())));
-		/*Instancer<ScrollInstance> chainKey = materialManager.defaultSolid()
-															.material(AllMaterialSpecs.BELTS)
-															.getModel();*/
-
 		chainInstance = setupChainData(chainKey.createInstance(), CTSpriteShifts.CHAIN);
 
 		//Shaft towards belt.
@@ -64,24 +60,6 @@ public class TransmissionChainVisual extends KineticBlockEntityVisual<Transmissi
 		//Update with other data.
 		update(0);
 	}
-
-	/*@Override
-	public void update()
-	{
-		Direction facing = blockState.getValue(TransmissionChainBlock.FACING);
-
-		for (Map.Entry<Direction, RotatingInstance> key : shaftInstances.entrySet())
-		{
-			Direction direction = key.getKey();
-			Direction.Axis axis = direction.getAxis();
-
-			updateRotation(key.getValue(), axis, blockEntity.getSpeed() * blockEntity.getRotationSpeedModifier(direction));
-		}
-
-		chainInstance.setScrollTexture(CTSpriteShifts.CHAIN)
-		   .setColor(blockEntity)
-		   .setRotationalSpeed(getChainRotationalSpeed(facing) * blockEntity.getRotationSpeedModifier(facing));
-	}*/
 
 	@Override
 	public void update(float partialTick)
@@ -167,9 +145,6 @@ public class TransmissionChainVisual extends KineticBlockEntityVisual<Transmissi
 
 		RotatingInstance instance = shaft.createInstance();
 		instance.setRotationAxis(direction.getAxis())
-		   //.setRotationalSpeed(blockEntity.getSpeed() * RotatingInstance.SPEED_MULTIPLIER/* * blockEntity.getRotationSpeedModifier(direction)*/)
-		   //.setRotationOffset(rotationOffset(blockEntity.getBlockState(), direction.getAxis(), blockEntity.getBlockPos()))
-		   //.setColor(blockEntity)
 		   .setPosition(location.add(offset))
 		   .light(blockLight, skyLight);
 
@@ -196,23 +171,8 @@ public class TransmissionChainVisual extends KineticBlockEntityVisual<Transmissi
 	 */
 	private ScrollInstance setupChainData(ScrollInstance instance, SpriteShiftEntry spriteShift)
 	{
-		Direction facing = blockState.getValue(TransmissionChainBlock.FACING);
-		Quaternionf rotation = new Quaternionf();
-		Direction up = Direction.UP;
-
-		Vector3f vecFacing = facing.step().normalize();
-		Vector3f vecUp = up.step().normalize();
-
-		if (facing == Direction.UP)
-			rotation = new Quaternionf().fromAxisAngleDeg(1, 0, 0, 90);
-		else if (facing == Direction.DOWN)
-			rotation = new Quaternionf().fromAxisAngleDeg(1, 0, 0, -90);
-		else
-			rotation = rotation.lookAlong(vecFacing, vecUp);
-
-		//Fix for wrong axis alignment (maybe check why).
-		if (facing == Direction.WEST || facing == Direction.EAST)
-			rotation = rotation.invert();
+		Direction facing = blockState.getValue(AbstractTransmissionChainBlock.FACING);
+		Quaternionf rotation = TransmissionChainHelpers.getBlockRotation(facing);
 
 		if (blockEntity.isConnected())
 		{

@@ -3,6 +3,7 @@ package com.serpenssolida.createtransmission.forge;
 import com.serpenssolida.createtransmission.content.chain.AbstractTransmissionChainBlock;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainConnection;
 import com.simibubi.create.Create;
+import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
@@ -17,8 +18,10 @@ import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 
 import static com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.*;
 
-public class CTBuilderTransformersImpl
+public class CTDataGenImpl
 {
+	private CTDataGenImpl() {}
+
 	public static <T extends Block> void encasedTransmissionChain(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, String casing)
 	{
 		String path = "block/transmission_chain/encased/";
@@ -49,7 +52,7 @@ public class CTBuilderTransformersImpl
 								  .uvLock(false)
 								  .build();
 
-		}, AbstractTransmissionChainBlock.WATERLOGGED);
+		}, ProperWaterloggedBlock.WATERLOGGED);
 	}
 
 	public static <T extends Block> void noModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov)
@@ -57,7 +60,7 @@ public class CTBuilderTransformersImpl
 		VariantBlockStateBuilder variantBuilder = prov.getVariantBuilder(ctx.getEntry());
 		ModelFile.ExistingModelFile modelFile = prov.models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Create.ID, "block/belt/particle"));
 
-		variantBuilder.forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(modelFile).build(), AbstractTransmissionChainBlock.WATERLOGGED);
+		variantBuilder.forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(modelFile).build(), ProperWaterloggedBlock.WATERLOGGED);
 	}
 
 	public static void handheldItem(DataGenContext<Item, BlockItem> ctx, RegistrateItemModelProvider prov)

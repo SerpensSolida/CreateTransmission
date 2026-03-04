@@ -7,9 +7,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-public class CTBuilderTransformersImpl
+public class CTDataGenImpl
 {
-	private CTBuilderTransformersImpl(){}
+	private CTDataGenImpl(){}
 
 	public static <T extends Block> void encasedTransmissionChain(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, String casing)
 	{
