@@ -47,8 +47,8 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 		msr.rotateCentered(rotation);
 
 		//Prepare model.
-		PartialModel beltPartial = getChainModel(connection.type());
-		SuperByteBuffer chainBuffer = CachedBuffers.partial(beltPartial, blockState);
+		PartialModel chainPartial = getChainModel(connection.type());
+		SuperByteBuffer chainBuffer = CachedBuffers.partial(chainPartial, blockState);
 		chainBuffer.light(light);
 		SpriteShiftEntry spriteShift = CTSpriteShifts.CHAIN;
 

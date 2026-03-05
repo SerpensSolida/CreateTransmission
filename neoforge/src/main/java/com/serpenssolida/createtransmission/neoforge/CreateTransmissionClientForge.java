@@ -13,11 +13,6 @@ public class CreateTransmissionClientForge
 {
 	public CreateTransmissionClientForge(IEventBus modEventBus)
 	{
-		modEventBus.addListener(CreateTransmissionClientForge::clientInit);
-	}
-
-	public static void clientInit(final FMLClientSetupEvent event)
-	{
 		CTModels.init();
 	}
 
