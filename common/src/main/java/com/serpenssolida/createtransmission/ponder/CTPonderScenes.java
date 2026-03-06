@@ -5,6 +5,7 @@ import com.serpenssolida.createtransmission.content.chain.AbstractTransmissionCh
 import com.serpenssolida.createtransmission.content.chain.EncasedTransmissionChainBlock;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainBlock;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -51,7 +52,8 @@ public class CTPonderScenes
 		scene.overlay()
 			 .showText(10 + 4 * 20)
 			 .placeNearTarget()
-			 .text("Encased chain drive can be used to transfer rotational power between belts.");
+			 .text("Encased chain drive can be used to transfer rotational power between belts.")
+			 .pointAt(rightChain.getCenter());
 
 		world.showSection(leftChain, Direction.DOWN);
 		world.showSection(rightChain, Direction.DOWN);
@@ -64,7 +66,8 @@ public class CTPonderScenes
 		scene.overlay()
 			 .showText(40)
 			 .placeNearTarget()
-			 .text("But are bulky...");
+			 .text("But are bulky...")
+			 .pointAt(rightChain.getCenter());
 
 		scene.idleSeconds(2);
 
@@ -103,16 +106,18 @@ public class CTPonderScenes
 		scene.overlay()
 			 .showText(4 * 20)
 			 .placeNearTarget()
-			 .text("As an alternative you can use Transmission Chains! They are slim and only work on belts.");
+			 .text("As an alternative you can use Transmission Chains! They are slim and only work on belts.")
+			 .pointAt(rightChain.getCenter());
 
 		scene.idleSeconds(5);
 
 		scene.addKeyframe();
 		scene.overlay()
-			 .showText(16 * 20)
+			 .showText(4 * 20)
 			 .placeNearTarget()
-			 .text("They can power belt in different arrangements.");
-		scene.idleSeconds(1);
+			 .text("They can power belt in different arrangements.")
+			 .pointAt(rightBelt.getCenter());
+		scene.idleSeconds(5);
 
 		Vec3 textPos = new Vec3(2, 1, 4);
 
@@ -121,7 +126,7 @@ public class CTPonderScenes
 			 .placeNearTarget()
 			 .text("Horizontally...")
 			 .pointAt(textPos);
-		scene.idleSeconds(4);
+		scene.idleSeconds(5);
 
 
 		world.hideSection(util.select().layer(1), Direction.UP);
@@ -178,6 +183,14 @@ public class CTPonderScenes
 
 		scene.idleSeconds(1);
 
+		scene.overlay()
+			 .showText(3 * 20)
+			 .placeNearTarget()
+			 .text("Transmission Chains can also be encased!")
+			 .pointAt(rightChainPos.getCenter());
+
+		scene.idleSeconds(4);
+
 		for (int i = 0; i < 6; i++)
 		{
 			BlockPos startingPos = util.grid().at(5, 1, 3);
@@ -185,12 +198,10 @@ public class CTPonderScenes
 			scene.idle(2);
 		}
 
-		scene.overlay()
-			 .showText(8 + 9 * 20)
-			 .placeNearTarget()
-			 .text("Transmission Chains can also be encased!");
+		scene.idleSeconds(1);
+		scene.addKeyframe();
 
-		scene.idleSeconds(2);
+		scene.idleSeconds(1);
 		scene.overlay().showControls(util.vector().topOf(leftChainPos), Pointing.DOWN, 20).rightClick()
 			 .withItem(AllBlocks.ANDESITE_CASING.asStack());
 		scene.idle(10);
@@ -227,8 +238,12 @@ public class CTPonderScenes
 														.setValue(AbstractTransmissionChainBlock.CONNECTION_TYPE, ConnectionType.CHAIN)
 														.setValue(AbstractTransmissionChainBlock.CONNECTION_SIDE, ChainSide.LEFT), true);
 
+		scene.addKeyframe();
+
 		scene.idleSeconds(2);
-		scene.overlay().showControls(util.vector().topOf(leftChainPos), Pointing.DOWN, 20).rightClick()
+		scene.overlay()
+			 .showControls(util.vector().topOf(leftChainPos), Pointing.DOWN, 20)
+			 .rightClick()
 			 .withItem(AllBlocks.BRASS_CASING.asStack());
 		scene.idle(10);
 
@@ -244,7 +259,30 @@ public class CTPonderScenes
 														.setValue(AbstractTransmissionChainBlock.CONNECTION_TYPE, ConnectionType.CHAIN)
 														.setValue(AbstractTransmissionChainBlock.CONNECTION_SIDE, ChainSide.LEFT), true);
 
-		scene.idleSeconds(2);
+
+		scene.addKeyframe();
+
+		scene.idleSeconds(1);
+		scene.overlay()
+			 .showText(4 * 20)
+			 .text("A wrench can be used to remove the casing.")
+			 .placeNearTarget()
+			 .pointAt(util.vector().blockSurface(leftChainPos.south(), Direction.DOWN));
+
+		scene.idleSeconds(1);
+		scene.overlay()
+			 .showControls(util.vector().topOf(leftChainPos.south()), Pointing.DOWN, 40)
+			 .rightClick()
+			 .withItem(AllItems.WRENCH.asStack());
+
+		scene.idle(7);
+		world.setBlock(leftChainPos, chainBlock.getDefaultState()
+											   .setValue(AbstractTransmissionChainBlock.FACING, Direction.SOUTH)
+											   .setValue(AbstractTransmissionChainBlock.CONNECTION_TYPE, ConnectionType.CHAIN)
+											   .setValue(AbstractTransmissionChainBlock.CONNECTION_SIDE, ChainSide.RIGHT), true);
+
+		scene.idleSeconds(4);
+		scene.markAsFinished();
 	}
 
 	@ExpectPlatform
