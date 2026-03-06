@@ -2,6 +2,7 @@ package com.serpenssolida.createtransmission.neoforge;
 
 import com.serpenssolida.createtransmission.CTModels;
 import com.serpenssolida.createtransmission.CreateTransmission;
+import com.serpenssolida.createtransmission.CreateTransmissionClient;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -13,7 +14,8 @@ public class CreateTransmissionClientForge
 {
 	public CreateTransmissionClientForge(IEventBus modEventBus)
 	{
-		CTModels.init();
+		CreateTransmissionClient.init();
+
 	}
 
 }
