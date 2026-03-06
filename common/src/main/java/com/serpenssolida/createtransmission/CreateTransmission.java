@@ -1,6 +1,7 @@
 package com.serpenssolida.createtransmission;
 
 import com.serpenssolida.createtransmission.content.chain.AbstractTransmissionChainBlock;
+import com.serpenssolida.createtransmission.ponder.CTPonderIndex;
 import com.simibubi.create.api.contraption.BlockMovementChecks;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +29,7 @@ public class CreateTransmission
 
         CTBlocks.init();
         CTBlockEntities.init();
+		CTPonderIndex.init();
 
         //Check used when glue is applied to transmission chain.
         BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) ->
