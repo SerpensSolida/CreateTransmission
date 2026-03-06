@@ -2,6 +2,9 @@ package com.serpenssolida.createtransmission.forge;
 
 import com.serpenssolida.createtransmission.CTModels;
 import com.serpenssolida.createtransmission.CreateTransmission;
+import com.serpenssolida.createtransmission.CreateTransmissionClient;
+import com.serpenssolida.createtransmission.ponder.CTPonderIndex;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -18,7 +21,7 @@ public class CreateTransmissionModForge
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         CreateTransmission.REGISTRATE.registerEventListeners(eventBus);
         CreateTransmission.init();
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> CTModels::init);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> CreateTransmissionClient::init);
         CTCreativeTabsImpl.register(eventBus);
     }
 }

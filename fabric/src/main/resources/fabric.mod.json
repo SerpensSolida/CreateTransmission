@@ -18,7 +18,7 @@
       "com.serpenssolida.createtransmission.fabric.CreateTransmissionFabric"
     ],
     "client": [
-      "com.serpenssolida.createtransmission.fabric.CreateTransmissionClient"
+      "com.serpenssolida.createtransmission.fabric.CreateTransmissionFabricClient"
     ]
   },
   "mixins": [
