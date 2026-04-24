@@ -1,9 +1,9 @@
 {
-  "block.createtransmission.andesite_encased_transmission_chain": "安山链条盘",
-  "block.createtransmission.brass_encased_transmission_chain": "黄铜链条盘",
+  "block.createtransmission.andesite_encased_transmission_chain": "安山链壳",
+  "block.createtransmission.brass_encased_transmission_chain": "黄铜链壳",
   "block.createtransmission.transmission_chain": "链条",
-  "createtransmission.ponder.encasing.header": "装饰链条",
-  "createtransmission.ponder.encasing.text_1": "传送带轴上的链条也是可以用机壳装饰的!",
+  "createtransmission.ponder.encasing.header": "封装链条",
+  "createtransmission.ponder.encasing.text_1": "传送带轴上的链条也是可以用机壳封装的!",
   "createtransmission.ponder.encasing.text_2": "可以用扳手移除机壳",
   "createtransmission.ponder.usage.header": "用链条为传送带传递动力",
   "createtransmission.ponder.usage.text_1": "链式传动箱组可以为传送带之间传递动力",
