@@ -141,11 +141,10 @@ public class TransmissionChainVisual extends KineticBlockEntityVisual<Transmissi
 		Instancer<RotatingInstance> shaft = instancerProvider().instancer(AllInstanceTypes.ROTATING, getShaftModel(direction));
 
 		Vector3f location = new Vector3f(getVisualPosition().getX(), getVisualPosition().getY(), getVisualPosition().getZ());
-		Vector3f offset = direction.step().mul(0.03f);
 
 		RotatingInstance instance = shaft.createInstance();
 		instance.setRotationAxis(direction.getAxis())
-		   .setPosition(location.add(offset))
+		   .setPosition(location)
 		   .light(blockLight, skyLight);
 
 		return instance;
