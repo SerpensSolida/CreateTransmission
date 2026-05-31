@@ -63,7 +63,6 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 		PoseStack ps = new PoseStack();
 		PoseTransformStack msrShaft = TransformStack.of(ps);
 		msrShaft.rotateCentered(TransmissionChainHelpers.getBlockRotation(facing.getOpposite()));
-		msrShaft.translate(0, 0, 0.03);
 		superByteBuffer.light(light).transform(ps).renderInto(ms, vb);
 	}
 
