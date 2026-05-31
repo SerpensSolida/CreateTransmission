@@ -12,7 +12,6 @@ public class CTBlockEntities
 	public static final BlockEntityEntry<TransmissionChainBlockEntity> TRANSMISSION_CHAIN = CreateTransmission.REGISTRATE
 			.blockEntity("transmission_chain", TransmissionChainBlockEntity::new)
 			.transform(chainVisual())
-			//.visual(() -> TransmissionChainVisual::new)
 			.validBlocks(CTBlocks.TRANSMISSION_CHAIN, CTBlocks.ANDESITE_ENCASED_TRANSMISSION_CHAIN, CTBlocks.BRASS_ENCASED_TRANSMISSION_CHAIN)
 			.renderer(() -> TransmissionChainRenderer::new)
 			.register();
