@@ -7,6 +7,7 @@ import com.serpenssolida.createtransmission.CTModels;
 import com.serpenssolida.createtransmission.CTSpriteShifts;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainConnection;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ConnectionType;
+import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainDirection;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
@@ -19,9 +20,12 @@ import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Quaternionf;
+
+import static com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer.*;
 
 public class TransmissionChainRenderer extends SafeBlockEntityRenderer<TransmissionChainBlockEntity>
 {
@@ -32,19 +36,44 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 	protected void renderSafe(TransmissionChainBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay)
 	{
 		BlockState blockState = be.getBlockState();
-		if (VisualizationManager.supportsVisualization(be.getLevel()) && !checkBlockState(be))
+
+		if (VisualizationManager.supportsVisualization(be.getLevel()) || !checkBlockState(be))
 			return;
 
-		float renderTick = AnimationTickHolder.getRenderTime(be.getLevel());
-		PoseStack localTransforms = new PoseStack();
-		PoseTransformStack msr = TransformStack.of(localTransforms);
-		VertexConsumer vb = buffer.getBuffer(RenderType.solid());
+		renderChain(be, ms, buffer, light, blockState);
+
 		ChainConnection connection = AbstractTransmissionChainBlock.getConnection(blockState);
 		Direction facing = blockState.getValue(AbstractTransmissionChainBlock.FACING);
 
-		//Rotate the model.
-		Quaternionf rotation = TransmissionChainHelpers.getRotation(be);
-		msr.rotateCentered(rotation);
+		if (connection.type() == ConnectionType.BELT)
+			renderShaft(be, ms, buffer, light, blockState, ChainDirection.of(facing).getDirectionFromSide(connection.side()));
+
+
+		renderShaft(be, ms, buffer, light, blockState, facing);
+	}
+
+	private void renderShaft(TransmissionChainBlockEntity be, PoseStack ms, MultiBufferSource buffer, int light, BlockState blockState, Direction facing)
+	{
+		VertexConsumer vb = buffer.getBuffer(RenderType.solid());
+
+		BlockPos pos = be.getBlockPos();
+		Direction.Axis axis = facing.getAxis();
+		SuperByteBuffer superByteBuffer = kineticRotationTransform(CachedBuffers.partial(CTModels.CHAIN_SHAFT, blockState), be, axis, getAngleForBe(be, pos, axis), light);
+
+		PoseStack ps = new PoseStack();
+		PoseTransformStack msrShaft = TransformStack.of(ps);
+		msrShaft.rotateCentered(TransmissionChainHelpers.getBlockRotation(facing.getOpposite()));
+		msrShaft.translate(0, 0, 0.03);
+		superByteBuffer.light(light).transform(ps).renderInto(ms, vb);
+	}
+
+	private void renderChain(TransmissionChainBlockEntity be, PoseStack ms, MultiBufferSource buffer, int light, BlockState blockState)
+	{
+		float renderTick = AnimationTickHolder.getRenderTime(be.getLevel());
+		VertexConsumer vb = buffer.getBuffer(RenderType.solid());
+
+		ChainConnection connection = AbstractTransmissionChainBlock.getConnection(blockState);
+		Direction facing = blockState.getValue(AbstractTransmissionChainBlock.FACING);
 
 		//Prepare model.
 		PartialModel chainPartial = getChainModel(connection.type());
@@ -64,6 +93,12 @@ public class TransmissionChainRenderer extends SafeBlockEntityRenderer<Transmiss
 
 			chainBuffer.shiftUVScrolling(spriteShift, (float) scroll);
 		}
+
+		//Rotate the model.
+		PoseStack localTransforms = new PoseStack();
+		PoseTransformStack msr = TransformStack.of(localTransforms);
+		Quaternionf rotation = TransmissionChainHelpers.getRotation(be);
+		msr.rotateCentered(rotation);
 
 		chainBuffer.transform(localTransforms)
 				   .renderInto(ms, vb);
