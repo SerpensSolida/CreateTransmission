@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "createtransmission",
   "version": "${version}",
-  "name": "Create: Transfer",
+  "name": "Create: Transmission!",
   "description": "This mod adds a single block: Transmission Chain!\n\nThis block can be used to power belts in a cleaner way without using encased chain drive.",
   "authors": [
     "SerpensSolida"
