@@ -2,6 +2,7 @@ package com.serpenssolida.createtransmission.content.chain;
 
 import com.serpenssolida.createtransmission.CTBlockEntities;
 import com.serpenssolida.createtransmission.CTBlocks;
+import com.serpenssolida.createtransmission.config.CTConfig;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainConnection;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainDirection;
 import com.serpenssolida.createtransmission.content.chain.TransmissionChainHelpers.ChainSide;
@@ -84,6 +85,9 @@ public abstract class AbstractTransmissionChainBlock extends KineticBlock implem
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos)
 	{
+		if (!CTConfig.server().placingCheck.get())
+			return true;
+
 		Direction facing = state.getValue(FACING);
 		BlockPos otherPos = pos.offset(facing.getNormal());
 		BlockEntity otherEntity = world.getBlockEntity(otherPos);
@@ -284,12 +288,16 @@ public abstract class AbstractTransmissionChainBlock extends KineticBlock implem
 			if (facing.direction == neighbourState.getValue(FACING) && (isConnectionValid || isConnectionAvailable))
 				return ConnectionType.CHAIN;
 		}
-		else if (neighbourEntity instanceof BeltBlockEntity) //Belt.
+		else if (neighbourEntity instanceof KineticBlockEntity) //KineticBlock.
 		{
-			BeltBlock belt = (BeltBlock) neighbourState.getBlock();
+			KineticBlock kineticBlock = (KineticBlock) neighbourState.getBlock();
 			Direction directionBeltToChain = facing.getDirectionFromSide(side).getOpposite();
 
-			boolean hasShaftTowards = belt.hasShaftTowards(world, neighbourPos, neighbourState, directionBeltToChain);
+			//Placing check setting.
+			if (CTConfig.server().placingCheck.get() && !(neighbourEntity instanceof BeltBlockEntity))
+				return ConnectionType.NONE;
+
+			boolean hasShaftTowards = kineticBlock.hasShaftTowards(world, neighbourPos, neighbourState, directionBeltToChain);
 
 			if (hasShaftTowards)
 				return ConnectionType.BELT;

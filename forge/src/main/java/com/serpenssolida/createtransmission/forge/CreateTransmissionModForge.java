@@ -15,8 +15,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(CreateTransmission.MOD_ID)
 public class CreateTransmissionModForge
 {
+    public static ModLoadingContext context;
+
     public CreateTransmissionModForge()
     {
+        context = FMLJavaModLoadingContext.get();
+
         // registrate must be given the mod event bus on forge before registration
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         CreateTransmission.REGISTRATE.registerEventListeners(eventBus);

@@ -1,5 +1,6 @@
 package com.serpenssolida.createtransmission;
 
+import com.serpenssolida.createtransmission.config.CTConfig;
 import com.serpenssolida.createtransmission.content.chain.AbstractTransmissionChainBlock;
 import com.serpenssolida.createtransmission.ponder.CTPonderIndex;
 import com.simibubi.create.api.contraption.BlockMovementChecks;
@@ -30,6 +31,7 @@ public class CreateTransmission
         CTBlocks.init();
         CTBlockEntities.init();
 		CTPonderIndex.init();
+		CTConfig.register();
 
         //Check used when glue is applied to transmission chain.
         BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) ->
