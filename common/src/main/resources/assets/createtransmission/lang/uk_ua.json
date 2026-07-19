@@ -1,0 +1,17 @@
+{
+  "block.createtransmission.andesite_encased_transmission_chain": "Облицьований андезитом трансмісійний ланцюг",
+  "block.createtransmission.brass_encased_transmission_chain": "Облицьований латунню трансмісійний ланцюг",
+  "block.createtransmission.transmission_chain": "Трансмісійний ланцюг",
+  "createtransmission.ponder.encasing.header": "Облицювання трансмісійних ланцюгів",
+  "createtransmission.ponder.encasing.text_1": "Трансмісійні ланцюги також можна облицювати!",
+  "createtransmission.ponder.encasing.text_2": "Застосування гайкового ключа облицювання можна зняти.",
+  "createtransmission.ponder.usage.header": "Передача сили обертання за допомогою трансмісійних ланцюгів",
+  "createtransmission.ponder.usage.text_1": "Облицьований ланцюговий привід можна використовувати для передачі обертання між ременями.",
+  "createtransmission.ponder.usage.text_2": "Але така конструкція виходить занадто громіздкою…",
+  "createtransmission.ponder.usage.text_3": "Як альтернативу, ви можете використовувати трансмісійний ланцюг!\nВін дуже тонкий та працює лише на ременях.",
+  "createtransmission.ponder.usage.text_4": "Він може живити ремень у різніх умовах.",
+  "createtransmission.ponder.usage.text_5": "Поземно…",
+  "createtransmission.ponder.usage.text_6": "…під прямим кутом…",
+  "createtransmission.ponder.usage.text_7": "…та доземно.",
+  "creativeTab.createtransmission.main": "Create: Transmission"
+}
