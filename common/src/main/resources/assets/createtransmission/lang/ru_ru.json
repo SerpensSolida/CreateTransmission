@@ -1,0 +1,17 @@
+{
+  "block.createtransmission.andesite_encased_transmission_chain": "Андезитовая кожуховая трансмиссионная цепь",
+  "block.createtransmission.brass_encased_transmission_chain": "Латунная кожуховая трансмиссионная цепь",
+  "block.createtransmission.transmission_chain": "Трансмиссионная цепь",
+  "createtransmission.ponder.encasing.header": "Установка кожуха на трансмиссионные цепи",
+  "createtransmission.ponder.encasing.text_1": "Трансмиссионные цепи тоже можно помещать в кожух!",
+  "createtransmission.ponder.encasing.text_2": "Гаечный ключ можно использовать для снятия кожуха.",
+  "createtransmission.ponder.usage.header": "Передача вращательной силы с помощью трансмиссионных цепей",
+  "createtransmission.ponder.usage.text_1": "Кожуховый цепной привод можно использовать для передачи вращательной мощности между лентами.",
+  "createtransmission.ponder.usage.text_2": "Но они громоздкие...",
+  "createtransmission.ponder.usage.text_3": "В качестве альтернативы вы можете использовать трансмиссионные цепи!\nОни тонкие и работают только с лентами.",
+  "createtransmission.ponder.usage.text_4": "Они могут передавать мощность лентам в различных конфигурациях.",
+  "createtransmission.ponder.usage.text_5": "Горизонтально...",
+  "createtransmission.ponder.usage.text_6": "...под прямым углом...",
+  "createtransmission.ponder.usage.text_7": "...и вертикально.",
+  "creativeTab.createtransmission.main": "Create: Transmission"
+}
